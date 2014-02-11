@@ -1,0 +1,99 @@
+<h1>Step 2: Configure rules</h1>
+
+
+<div class="s-panel">
+    <div class="page-header">
+        <h3>Setup side </h3>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="s-panel">
+                    <h4>Select side column</h4>
+                    <filtered-select items="config.csv.content.headers" selected-item="config.sideColumn"></filtered-select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="s-panel">
+                    <h4>Selected column <b>{{config.sideColumn}}</b></h4>
+
+                    <div class="form-group">
+                        <label for="sideExp" class="col-sm-4 control-label">Value for side 1</label>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="config.side1Value" id="sideExp">
+                        </div>
+                    </div>
+                    <div>
+                        Side 1 items: {{config.side1ItemsCount}}
+                    </div>
+                    <div>
+                        Side 2 items: {{config.side2ItemsCount}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="s-panel">
+    <div class="page-header">
+        <h3>Rules</h3>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="s-panel">
+                    <h4>Select group columns</h4>
+                    <filtered-select multiple items="config.availGroupColumns"
+                                     selected-items="config.groupColumns"></filtered-select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="s-panel">
+                    <h4>Select aggregate columns</b></h4>
+                    <filtered-select multiple items="config.availAggrColumns"
+                                     selected-items="config.aggrColumns"></filtered-select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="s-panel">
+    <div class="page-header">
+        <h3>Preview</h3>
+    </div>
+    <div class="table-responsive" style="max-height: 200px; overflow: scroll">
+        <table class="table">
+            <thead >
+            <tr>
+                <th>#</th>
+                <th ng-repeat="header in config.csv.content.headers" ng-class="config.colStylesFor($index)">{{header}}</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr ng-repeat="row in config.csv.content.rows">
+                <td>{{$index+1}}</td>
+                <td ng-repeat="cell in row" ng-class="config.colStylesFor($index)">{{cell}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-sm-12">
+        <button type="button" class="btn btn-danger" ng-click="config.cancel()">
+            <span class="glyphicon glyphicon-remove"></span> Cancel
+        </button>
+
+        <button type="button" class="btn btn-success pull-right" ng-click="config.nextStep()">
+            <span class="glyphicon glyphicon-chevron-right"></span> Continue
+        </button>
+    </div>
+</div>
